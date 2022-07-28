@@ -1,0 +1,36 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+
+
+
+{{^modules}}
+    <div class="">
+        <h5>{{#str}} noactivityfound, qbank_qtoactivity {{/str}}</h5>
+        <a href="{{{returnurl}}}" class="btn btn-secondary">{{#str}} continue, core {{/str}}</a>
+    </div>
+{{/modules}}
+{{#modules}}
+    <div class="questiontoactivity-header mb-4">
+        <h4>{{#str}} pluginname, qbank_qtoactivity {{/str}}</h4>
+    </div>
+    <form action="{{{addtomoduleurl}}}" method="post" id="addtomodule">
+        {{{moduledropdown}}}
+        <input type="submit" value="{{#str}} addtomodule, qbank_qtoactivity {{/str}}" class="btn btn-primary" name="addtomod" data-action="toggle" data-togglegroup="qbank"
+               data-toggle="action" form="addtomodule">
+        <a href="{{{returnurl}}}" class="btn btn-secondary">{{#str}} cancel_add_to_module, qbank_qtoactivity {{/str}}</a>
+    </form>
+{{/modules}}
