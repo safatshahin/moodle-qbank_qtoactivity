@@ -15,10 +15,9 @@
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
 /**
- * Plugin strings are defined here.
+ * Add to activity page
  *
  * @package     qbank_q2activity
- * @category    string
  * @copyright   2022 Harrison Liddell, hliddell@myune.edu.au
  * @copyright   Mark Hay,         mhay23@myune.edu.au
  * @copyright   Henry Campbell,        hcampb25@myune.edu.au
@@ -26,8 +25,22 @@
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
-$string['pluginname'] = 'Question2Activity';
+require_once('../../../config.php');
 
-// Actions.
-$string['addtoquiz'] = "Add to Quiz";
+// Context and page setup.
+$context = context_system::instance();
+
+$PAGE->set_context($context);
+$PAGE->set_url(new moodle_url('/question/bank/q2activity/add_to_activity.php'));
+$PAGE->set_pagelayout('standard');
+$PAGE->set_title($SITE->fullname);
+$PAGE->set_heading(get_string('pluginname', 'qbank_q2activity'));
+
+// Display some placeholder elements for now.
+echo $OUTPUT->header();
+
+echo '<h3>501</h3>';
+echo '<h4>Implementation Pending.</h4>';
+
+// Show the footer.
+echo $OUTPUT->footer();
