@@ -19,7 +19,7 @@
  *
  * @package     qbank_q2activity
  * @copyright   2022 Harrison Liddell, hliddell@myune.edu.au
- * @copyright   2022 Mark Hay,         mhay23@myune.edu.au
+ * @copyright   Mark Hay,              mhay23@myune.edu.au
  * @copyright   Henry Campbell,        hcampb25@myune.edu.au
  * @copyright   Luke Purnell,          lpurnell@myune.edu.au
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -29,6 +29,6 @@ defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'qbank_q2activity';
 $plugin->release = '0.0.1';
-$plugin->version = 2022073100;
+$plugin->version = 2022080900;
 $plugin->requires = 2022041900;
 $plugin->maturity = MATURITY_ALPHA;
