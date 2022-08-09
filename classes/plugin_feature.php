@@ -19,7 +19,7 @@
  *
  * @package     qbank_q2activity
  * @copyright   2022 Harrison Liddell, hliddell@myune.edu.au
- * @copyright   2022 Mark Hay,         mhay23@myune.edu.au
+ * @copyright   Mark Hay,              mhay23@myune.edu.au
  * @copyright   Henry Campbell,        hcampb25@myune.edu.au
  * @copyright   Luke Purnell,          lpurnell@myune.edu.au
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -35,7 +35,7 @@ use core_question\local\bank\plugin_features_base;
  *
  * @package     qbank_q2activity
  * @copyright   2022 Harrison Liddell, hliddell@myune.edu.au
- * @copyright   Mark Hay,         mhay23@myune.edu.au
+ * @copyright   Mark Hay,              mhay23@myune.edu.au
  * @copyright   Henry Campbell,        hcampb25@myune.edu.au
  * @copyright   Luke Purnell,          lpurnell@myune.edu.au
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
