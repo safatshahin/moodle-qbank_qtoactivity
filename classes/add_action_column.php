@@ -16,7 +16,8 @@
 
 namespace qbank_q2activity;
 
-use core_question\local\bank\menu_action_column_base;
+use core_question\local\bank\action_column_base;
+use core_question\local\bank\menuable_action;
 
 
 /**
@@ -29,16 +30,16 @@ use core_question\local\bank\menu_action_column_base;
  * @copyright   Luke Purnell,          lpurnell@myune.edu.au
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class add_action_column extends menu_action_column_base {
+class add_action_column extends action_column_base implements menuable_action {
+
     /**
-     * Defines the URL, Icon, and Label to be used for the action.
+     * Required by 'action_column_base' but unused here
      *
-     * @param  stdClass $question
-     * @return array The url, icon, and label
+     * @param int $question the question for display
+     * @param array $rowclasses rows
      */
-    protected function get_url_icon_and_label(\stdClass $question): array {
-        $url = new \moodle_url('/question/bank/q2activity/addtoactivity.php');
-        return [$url, 't/move', get_string('addtoquiz', 'qbank_q2activity')];
+    protected function display_content($question, $rowclasses): void {
+        pass;
     }
 
     /**
@@ -48,5 +49,31 @@ class add_action_column extends menu_action_column_base {
      */
     public function get_name(): string {
         return 'addtoquizaction';
+    }
+
+    /**
+     * Defines the URL, Icon, and attributes to be used for the action.
+     *
+     * @param  stdClass $question
+     * @return action_menu_link The action menu link to be added
+     */
+    public function get_action_menu_link(\stdClass $question): ?\action_menu_link {
+        global $PAGE;
+
+        // This references the html element that the event listener is added to.
+        $target = 'q2activityquestion_' . $question->id;
+        $datatarget = '[data-target="' . $target . '"]';
+
+        $PAGE->requires->js_call_amd('qbank_q2activity/q2activity', 'init', [$datatarget, $question->contextid]);
+
+        $params = [
+            'data-target' => $target,
+            'data-questionid' => $question->id,
+        ];
+
+        $url = new \moodle_url('#');
+
+        return new \action_menu_link_secondary($url, new \pix_icon('t/move', ''),
+            get_string('addtoquiz', 'qbank_q2activity'), $params);
     }
 }
