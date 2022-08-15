@@ -36,11 +36,15 @@ $PAGE->set_pagelayout('standard');
 $PAGE->set_title($SITE->fullname);
 $PAGE->set_heading(get_string('pluginname', 'qbank_q2activity'));
 
+// Get the question ID from the URL.
+$questionidtoadd = optional_param('questionid', 0, PARAM_INT);
+
 // Display some placeholder elements for now.
 echo $OUTPUT->header();
 
 echo '<h3>501</h3>';
 echo '<h4>Implementation Pending.</h4>';
+echo '<p>' . $questionidtoadd . '</p>';
 
 // Show the footer.
 echo $OUTPUT->footer();
