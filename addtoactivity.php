@@ -26,6 +26,7 @@
  */
 
 require_once('../../../config.php');
+require_once($CFG->dirroot . '/question/bank/q2activity/lib.php');
 
 // Context and page setup.
 $context = context_system::instance();
@@ -44,8 +45,22 @@ echo $OUTPUT->header();
 
 echo '<h3>501</h3>';
 echo '<h4>Implementation Pending.</h4>';
-echo '<p>' . $questionidtoadd . '</p>';
+echo '<br></br>';
 
+$rawrequestdata = $_REQUEST; // Get the reuqest parameters to check over.
+
+// If the 'questionid' parameter is set, we know it's a single action.
+if (array_key_exists('questionid', $rawrequestdata)) {
+    echo '<h5>Single Action Question ID</h5>';
+    echo '<p>' . $questionidtoadd . '</p>';
+} else {
+    echo '<h5>Bulk Action Question ID\'s</h5>';
+
+    $questionids = get_question_ids($rawrequestdata);
+    foreach ($questionids as $val) {
+        echo '<p>' . $val . '</p>';
+    }
+}
 
 // Show the footer.
 echo $OUTPUT->footer();
