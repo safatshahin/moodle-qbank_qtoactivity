@@ -29,6 +29,6 @@ defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'qbank_q2activity';
 $plugin->release = '0.0.1';
-$plugin->version = 2022080900;
+$plugin->version = 2022081700;
 $plugin->requires = 2022041900;
 $plugin->maturity = MATURITY_ALPHA;

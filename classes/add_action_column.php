@@ -37,7 +37,14 @@ class add_action_column extends menu_action_column_base {
      * @return array The url, icon, and label
      */
     protected function get_url_icon_and_label(\stdClass $question): array {
-        $url = new \moodle_url('/question/bank/q2activity/addtoactivity.php');
+        $addtoactivityurl = '/question/bank/q2activity/addtoactivity.php';
+
+        $params = array(
+            'questionid' => $question->id,
+        );
+
+        $url = new \moodle_url($addtoactivityurl, $params);
+
         return [$url, 't/move', get_string('addtoquiz', 'qbank_q2activity')];
     }
 
