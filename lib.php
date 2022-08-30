@@ -18,18 +18,37 @@
  * Helper functions and callbacks.
  *
  * @package    qbank_q2activity
- * @copyright  2021 Catalyst IT Australia Pty Ltd
- * @author     Safat Shahin <safatshahin@catalyst-au.net>
+ * @copyright   2022 Harrison Liddell, hliddell@myune.edu.au
+ * @copyright   Mark Hay,              mhay23@myune.edu.au
+ * @copyright   Henry Campbell,        hcampb25@myune.edu.au
+ * @copyright   Luke Purnell,          lpurnell@myune.edu.au
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * Gets the question ID's from a given raw request
+ * Question - add question fragment callback.
+ *
+ * @param array $args
+ * @return string rendered output
+ */
+function qbank_q2activity_output_fragment_add_question(array $args): string {
+
+    global $PAGE;
+
+    // Displaydata contains html fragments which are rendered by the output renderer utilising the moustache template.
+    $displaydata['question'] = "<h4>Modal triggered from question id: {$args['questionid']}</h4>";
+
+    return $PAGE->get_renderer('qbank_q2activity')->render_q2activity_fragment($displaydata);
+
+}
+
+/**
+ * Gets the question ID's from a given raw request.
  *
  * @param array $rawrequest raw request data
- * @return array question ids that have been retreived
+ * @return array question ids that have been retrieved
  */
 function get_question_ids(array $rawrequest): array {
     $ids = [];
