@@ -51,7 +51,6 @@ function qbank_q2activity_output_fragment_add_question(array $args): string {
  * @return array question ids that have been retrieved
  */
 function get_question_ids(array $rawrequest): array {
-
     $ids = [];
 
     foreach ($rawrequest as $key => $value) {

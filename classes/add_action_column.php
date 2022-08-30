@@ -41,6 +41,18 @@ class add_action_column extends action_column_base implements menuable_action {
     protected function display_content($question, $rowclasses): void {
         pass;
     }
+    
+    protected function get_url_icon_and_label(\stdClass $question): array {
+        $addtoactivityurl = '/question/bank/q2activity/addtoactivity.php';
+
+        $params = array(
+            'questionid' => $question->id,
+        );
+
+        $url = new \moodle_url($addtoactivityurl, $params);
+
+        return [$url, 't/move', get_string('addtoquiz', 'qbank_q2activity')];
+    }
 
     /**
      * Defines the name of the action
