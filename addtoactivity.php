@@ -62,5 +62,24 @@ if (array_key_exists('questionid', $rawrequestdata)) {
     }
 }
 
+// Some testing for getting all the activites that use the QBank API.
+//$allcoursemods = get_course_mods(1);
+//var_dump($allcoursemods);
+
+// Deprecated method, but oh boy was finding it useful.
+// $allcourseactivities = get_array_of_activities(1);
+// var_dump($allcourseactivities);
+
+$targetcourse = get_course(2);
+$courseactivities = course_modinfo::get_array_of_activities($targetcourse);
+
+foreach ($courseactivities as $value) {
+    var_dump($value);
+    echo '<p>----------------</p>';
+}
+
+echo '<h2> END OF DATA</h2>';
+
+
 // Show the footer.
 echo $OUTPUT->footer();
