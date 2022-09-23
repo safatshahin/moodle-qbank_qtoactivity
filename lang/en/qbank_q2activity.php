@@ -31,3 +31,6 @@ $string['pluginname'] = 'Question2Activity';
 
 // Actions.
 $string['addtoquiz'] = "Add to Quiz";
+
+//Null Provider
+$string['privacy:metadata'] = 'Question 2 Activity does not store data, it only passes exsisting questions';
