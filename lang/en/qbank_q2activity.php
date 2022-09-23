@@ -14,6 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
+
 /**
  * Plugin strings are defined here.
  *
@@ -26,11 +27,14 @@
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+namespace qbank_q2activity;
+
 defined('MOODLE_INTERNAL') || die();
 $string['pluginname'] = 'Question2Activity';
 
 // Actions.
 $string['addtoquiz'] = "Add to Quiz";
+$string['addtoquizinstruction'] = "Select the quiz to add questions to:";
 
-//Null Provider
+// Null Provider.
 $string['privacy:metadata'] = 'Question 2 Activity does not store data, it only passes exsisting questions';
