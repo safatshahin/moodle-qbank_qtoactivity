@@ -41,7 +41,13 @@ class add_action_column extends action_column_base implements menuable_action {
     protected function display_content($question, $rowclasses): void {
         pass;
     }
-    
+
+    /**
+     * Defines the url icon and label for the action
+     *
+     * @param \stdClass $question The question the action is called from
+     * @return array The name of the action
+     */
     protected function get_url_icon_and_label(\stdClass $question): array {
         $addtoactivityurl = '/question/bank/q2activity/addtoactivity.php';
 
