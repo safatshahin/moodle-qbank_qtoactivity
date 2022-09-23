@@ -65,3 +65,24 @@ function get_question_ids(?array $rawrequest): array {
 
     return $ids;
 }
+
+/**
+ * Gets a list of all quizzes for a given course
+ *
+ * @param  int $courseid The ID of the given course
+ * @return array An array of all the quizzes
+ */
+function qbank_q2activity_get_all_quizzes(int $courseid): array {
+    $quizlist = array();
+
+    $targetcourse = get_course($courseid);
+    $courseactivities = course_modinfo::get_array_of_activities($targetcourse);
+
+    foreach ($courseactivities as $value) {
+        if ($value->mod == "quiz") {
+            array_push($quizlist, $value);
+        }
+    }
+
+    return $quizlist;
+}

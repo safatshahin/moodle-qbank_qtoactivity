@@ -27,6 +27,7 @@
 
 require_once('../../../config.php');
 require_once($CFG->dirroot . '/question/bank/q2activity/lib.php');
+require_once($CFG->dirroot . '/mod/quiz/locallib.php');
 
 // Context and page setup.
 $context = context_system::instance();
@@ -70,13 +71,24 @@ if (array_key_exists('questionid', $rawrequestdata)) {
 // $allcourseactivities = get_array_of_activities(1);
 // var_dump($allcourseactivities);
 
-$targetcourse = get_course(2);
-$courseactivities = course_modinfo::get_array_of_activities($targetcourse);
+// $targetcourse = get_course(2);
+// $courseactivities = course_modinfo::get_array_of_activities($targetcourse);
 
-foreach ($courseactivities as $value) {
-    var_dump($value);
+// foreach ($courseactivities as $value) {
+//     var_dump($value);
+//     echo '<p>----------------</p>';
+// }
+
+// Get all of the quizzes for the course with an ID of 2
+$allquizzes = qbank_q2activity_get_all_quizzes(2);
+
+foreach ($allquizzes as $quiz) {
+    var_dump($quiz);
     echo '<p>----------------</p>';
 }
+
+// Test adding a question to a quiz. This just some basic example stuff.
+quiz_add_quiz_question($questionids[0], $allquizzes[0]);
 
 echo '<h2> END OF DATA</h2>';
 
