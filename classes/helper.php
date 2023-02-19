@@ -63,8 +63,8 @@ class helper {
     /**
      * Process the question came from the form post.
      *
-     * @param array $rawquestions raw questions came as a part of post.
-     * @return array question ids got from the post are processed and structured in an array.
+     * @param array $rawquestions raw un-sanitised $_REQUEST data from page
+     * @return array question ids got from the post are processed and structured in an array
      */
     public static function process_question_ids(array $rawquestions): array {
         $questionids = [];
@@ -73,7 +73,7 @@ class helper {
             // Parse input for question ids.
             if (preg_match('!^q([0-9]+)$!', $key, $matches)) {
                 $key = $matches[1];
-                $questionids[] = $key;
+                $questionids[] = clean_param($key, PARAM_INT);
             }
         }
         if (!empty($questionids)) {
