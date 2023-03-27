@@ -40,6 +40,10 @@ class bulk_add_action extends \core_question\local\bank\bulk_action_base {
         ];
     }
 
+    public function get_bulk_action_key(): string {
+        return 'move';
+    }
+    
     public function get_key(): string {
         return 'addtomoduleselected';
     }
