@@ -17,7 +17,7 @@
 namespace qbank_qtoactivity;
 
 use core_question\local\bank\plugin_features_base;
-use core_question\local\bank\bulk_action_base;
+use core_question\local\bank\view;
 
 
 /**
@@ -29,16 +29,17 @@ use core_question\local\bank\bulk_action_base;
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class plugin_feature extends plugin_features_base {
-
-    public function get_question_columns($qbank): array {
+    #[\Override]
+    public function get_question_actions($qbank): array {
         return [
-            new add_action_column($qbank),
+            new addtomodule_action($qbank),
         ];
     }
 
-    public function get_bulk_actions(): ?bulk_action_base  {
-//        return [
-            return new bulk_add_action();
-//        ];
+    #[\Override]
+    public function get_bulk_actions(?view $qbank = null): array {
+        return [
+            new bulk_add_action(),
+        ];
     }
 }

@@ -25,25 +25,49 @@ namespace qbank_qtoactivity;
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class bulk_add_action extends \core_question\local\bank\bulk_action_base {
+    /**
+     * Array of the return parameters.
+     * @var array $requiredparams
+     */
+    protected $requiredparams;
 
-    public function get_bulk_action_title(): string {
-        return get_string('addtomodule', 'qbank_qtoactivity');
+    #[\Override]
+    public function init(): void {
+        parent::init();
+        if (!empty($this->qbank->cm->id)) {
+            $this->requiredparams['cmid'] = $this->qbank->cm->id;
+        }
+        if (!empty($this->qbank->course->id)) {
+            $this->requiredparams['courseid'] = $this->qbank->course->id;
+        }
+        if (!empty($this->qbank->returnurl)) {
+            $this->requiredparams['returnurl'] = $this->qbank->returnurl;
+        }
     }
 
+    #[\Override]
+    public function get_bulk_action_title(): string {
+        return get_string('addtomodule', 'qbank_qtoactivity', $this->requiredparams);
+    }
+
+    #[\Override]
     public function get_bulk_action_url(): \moodle_url {
         return new \moodle_url('/question/bank/qtoactivity/addtoactivity.php');
     }
 
+    #[\Override]
     public function get_bulk_action_capabilities(): ?array {
         return [
             'moodle/question:editall',
         ];
     }
 
+    #[\Override]
     public function get_bulk_action_key(): string {
         return 'move';
     }
-    
+
+    #[\Override]
     public function get_key(): string {
         return 'addtomoduleselected';
     }

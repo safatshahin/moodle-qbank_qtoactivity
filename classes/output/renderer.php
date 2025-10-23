@@ -24,7 +24,6 @@ namespace qbank_qtoactivity\output;
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class renderer extends \plugin_renderer_base {
-
     /**
      * Renderer for module form.
      *
@@ -49,5 +48,4 @@ class renderer extends \plugin_renderer_base {
 
         return $this->render_from_template('qbank_qtoactivity/add_to_activity_form', $displaydata);
     }
-
 }

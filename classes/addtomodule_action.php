@@ -17,23 +17,23 @@
 namespace qbank_qtoactivity;
 
 use core_question\local\bank\menu_action_column_base;
+use core_question\local\bank\question_action_base;
 
 /**
- * Adds a single action titled 'Add to Quiz' to the actions menu.
+ * Adds a single action titled 'Add to Quiz' to the actions' menu.
  *
  * @package     qbank_qtoactivity
- * @copyright   2023 Safat Shahin <safatshahin@yahoo.com>
- * @author      Luke Purnel, Henry Campbell, Mark Hay, Harrison Liddell
+ * @copyright   2025 Safat Shahin <safatshahin@yahoo.com>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class add_action_column extends menu_action_column_base {
-
+class addtomodule_action extends question_action_base {
     /**
      * Array of the return parameters.
      * @var array $returnparams
      */
     protected $returnparams;
 
+    #[\Override]
     public function init(): void {
         parent::init();
         if (!empty($this->qbank->cm->id)) {
@@ -47,20 +47,21 @@ class add_action_column extends menu_action_column_base {
         }
     }
 
-    public function get_name(): string {
-        return 'addtomoduleaction';
+    #[\Override]
+    public function get_menu_position(): int {
+        return 200;
     }
 
+    #[\Override]
     protected function get_url_icon_and_label(\stdClass $question): array {
         $params = [
             'addtomoduleselected' => $question->id,
             'q' . $question->id => 1,
-            'sesskey' => sesskey()
+            'sesskey' => sesskey(),
         ];
         $addtomoduleparams = array_merge($params, $this->returnparams);
         $url = new \moodle_url('/question/bank/qtoactivity/addtoactivity.php', $addtomoduleparams);
 
         return [$url, 't/add', get_string('addtomodule', 'qbank_qtoactivity')];
     }
-
 }

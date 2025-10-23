@@ -30,7 +30,7 @@ require_once($CFG->dirroot . '/lib/datalib.php');
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class add_to_module_form extends \moodleform {
-
+    #[\Override]
     protected function definition() {
         $mform = $this->_form;
         $modules = $this->_customdata['modules'];

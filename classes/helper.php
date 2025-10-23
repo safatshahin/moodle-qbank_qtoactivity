@@ -24,7 +24,6 @@ namespace qbank_qtoactivity;
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class helper {
-
     /**
      * Get the module info from cm id.
      *
@@ -92,7 +91,7 @@ class helper {
     public static function add_to_module(string $addtomoduleselected, int $addtomodule): void {
         global $DB;
         if ($questionids = explode(',', $addtomoduleselected)) {
-            list($usql, $params) = $DB->get_in_or_equal($questionids);
+            [$usql, $params] = $DB->get_in_or_equal($questionids);
             $sql = "SELECT q.*, c.contextid
                       FROM {question} q
                       JOIN {question_versions} qv ON qv.questionid = q.id
@@ -109,6 +108,8 @@ class helper {
     }
 
     /**
+     * Add question to the quiz.
+     *
      * @param array $questions The questions to be added
      * @param \stdClass $quiz The quiz object
      * @return void
@@ -120,5 +121,4 @@ class helper {
             quiz_add_quiz_question($question->id, $quiz);
         }
     }
-
 }

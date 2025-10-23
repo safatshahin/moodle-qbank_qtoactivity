@@ -16,8 +16,6 @@
 
 namespace qbank_qtoactivity;
 
-use core_question\local\bank\question_edit_contexts;
-
 defined('MOODLE_INTERNAL') || die();
 
 global $CFG;
@@ -31,8 +29,7 @@ require_once($CFG->dirroot . '/question/editlib.php');
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @coversDefaultClass \qbank_qtoactivity\helper
  */
-class helper_test extends \advanced_testcase {
-
+final class helper_test extends \advanced_testcase {
     /**
      * @var \stdClass $questiondata1
      */
@@ -54,29 +51,32 @@ class helper_test extends \advanced_testcase {
      * @covers ::add_to_module
      * @covers ::question_add_to_quiz_avtivity
      */
-    public function test_add_to_module() {
+    public function test_add_to_module(): void {
         $this->resetAfterTest();
         $this->setAdminUser();
-        $generator = $this->getDataGenerator();
-        /** @var \core_question_generator $questiongenerator */
-        $questiongenerator = $generator->get_plugin_generator('core_question');
 
-        // Create a course.
-        $course = $generator->create_course();
-        $context = \context_course::instance($course->id);
-
-        // Create question in the default category.
-        $contexts = new question_edit_contexts($context);
-        $cat = question_make_default_categories($contexts->all());
-        $this->questiondata1 = $questiongenerator->create_question('numerical', null,
-            ['name' => 'Example question', 'category' => $cat->id]);
+        // Generate data.
+        $datagenerator = $this->getDataGenerator();
+        $course = $datagenerator->create_course();
+        $quiz = $datagenerator->create_module('quiz', ['course' => $course->id]);
+        $qgenerator = $datagenerator->get_plugin_generator('core_question');
+        $context = \context_module::instance($quiz->cmid);
+        $qcategory = $qgenerator->create_question_category(['contextid' => $context->id]);
+        $this->questiondata1 = $qgenerator->create_question(
+            'numerical',
+            null,
+            ['name' => 'Example question', 'category' => $qcategory->id],
+        );
 
         // Ensure the question is not in the cache.
         $cache = \cache::make('core', 'questiondata');
         $cache->delete($this->questiondata1->id);
 
-        $this->questiondata2 = $questiongenerator->create_question('numerical', null,
-            ['name' => 'Example question second', 'category' => $cat->id]);
+        $this->questiondata2 = $qgenerator->create_question(
+            'numerical',
+            null,
+            ['name' => 'Example question second', 'category' => $qcategory->id],
+        );
 
         // Ensure the question is not in the cache.
         $cache = \cache::make('core', 'questiondata');
@@ -85,7 +85,7 @@ class helper_test extends \advanced_testcase {
         // Posted raw data.
         $this->rawdata = [
             'courseid' => $course->id,
-            'cat' => "{$cat->id},{$context->id}",
+            'cat' => "{$qcategory->id},{$context->id}",
             'qpage' => '0',
             "q{$this->questiondata1->id}" => '1',
             "q{$this->questiondata2->id}" => '1',
@@ -114,11 +114,10 @@ class helper_test extends \advanced_testcase {
      * Test the question processing and return the question list.
      *
      * @return string
-     * @covers ::process_question_ids
      */
     protected function process_question_ids_test(): string {
         // Test the raw data processing.
-        list($questionids, $questionlist) = helper::process_question_ids($this->rawdata);
+        [$questionids, $questionlist] = helper::process_question_ids($this->rawdata);
         $this->assertEquals([$this->questiondata1->id, $this->questiondata2->id], $questionids);
         $this->assertEquals("{$this->questiondata1->id},{$this->questiondata2->id}", $questionlist);
         return $questionlist;
@@ -129,7 +128,7 @@ class helper_test extends \advanced_testcase {
      *
      * @covers ::get_modules_for_course
      */
-    public function test_get_modules_for_course() {
+    public function test_get_modules_for_course(): void {
         $this->resetAfterTest();
         $generator = $this->getDataGenerator();
 
@@ -158,5 +157,4 @@ class helper_test extends \advanced_testcase {
         $addtomoduleactivities = helper::get_modules_for_course($course->id);
         $this->assertCount(1, $addtomoduleactivities);
     }
-
 }

@@ -14,9 +14,17 @@
     You should have received a copy of the GNU General Public License
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
+{{!
+  @template qbank_qtoactivity/add_to_activity_form
 
-
-
+  Example context (json):
+    {"modules":[
+          {  "addtomoduleurl":"example.com",
+             "moduledropdown":"<p>Dropdown html</p>",
+             "returnurl":"example.com"
+          }
+      ]}
+}}
 {{^modules}}
     <div class="">
         <h5>{{#str}} noactivityfound, qbank_qtoactivity {{/str}}</h5>

@@ -23,9 +23,9 @@
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-global $CFG, $OUTPUT, $PAGE, $COURSE;
-
 require_once(__DIR__ . '/../../../config.php');
+
+global $CFG, $OUTPUT, $PAGE, $COURSE;
 require_once($CFG->dirroot . '/question/editlib.php');
 
 $addtomoduleselected = optional_param('addtomoduleselected', false, PARAM_BOOL);
@@ -43,12 +43,11 @@ if ($returnurl) {
 // Check if plugin is enabled or not.
 \core_question\local\bank\helper::require_plugin_enabled('qbank_qtoactivity');
 
-if ($cmid) {
-    list($module, $cm) = get_module_from_cmid($cmid);
-    require_login($cm->course, false, $cm);
-    $thiscontext = context_module::instance($cmid);
-    $modules = \qbank_qtoactivity\helper::get_module($cmid);
-} else if ($courseid) {
+if ($cmid && !$courseid) {
+    [$course, $cm] = get_course_and_cm_from_cmid($cmid);
+    $courseid = $course->id;
+}
+if ($courseid) {
     require_login($courseid, false);
     $thiscontext = context_course::instance($courseid);
     $modules = \qbank_qtoactivity\helper::get_modules_for_course($courseid);
@@ -84,7 +83,7 @@ echo $OUTPUT->header();
 
 if ($addtomoduleselected) {
     $rawquestions = $_REQUEST;
-    list($questionids, $questionlist) = \qbank_qtoactivity\helper::process_question_ids($rawquestions);
+    [$questionids, $questionlist] = \qbank_qtoactivity\helper::process_question_ids($rawquestions);
     // No questions were selected.
     if (!$questionids) {
         redirect($returnurl);
