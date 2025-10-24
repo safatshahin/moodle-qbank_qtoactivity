@@ -28,5 +28,5 @@ defined('MOODLE_INTERNAL') || die();
 $plugin->component = 'qbank_qtoactivity';
 $plugin->release = '1.0.0';
 $plugin->version = 2025102300;
-$plugin->requires = 2024100707;
+$plugin->requires = 2025041403;
 $plugin->maturity = MATURITY_STABLE;
