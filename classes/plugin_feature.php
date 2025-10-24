@@ -37,9 +37,9 @@ class plugin_feature extends plugin_features_base {
     }
 
     #[\Override]
-    public function get_bulk_actions(?view $qbank = null): array {
+    public function get_bulk_actions(view $qbank): array {
         return [
-            new bulk_add_action(),
+            new bulk_add_action($qbank),
         ];
     }
 }

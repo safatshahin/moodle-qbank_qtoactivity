@@ -27,8 +27,8 @@ require_once($CFG->dirroot . '/question/editlib.php');
  * @package     qbank_qtoactivity
  * @copyright   2023 Safat Shahin <safatshahin@yahoo.com>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @coversDefaultClass \qbank_qtoactivity\helper
  */
+#[\PHPUnit\Framework\Attributes\CoversClass(\qbank_qtoactivity\helper::class)]
 final class helper_test extends \advanced_testcase {
     /**
      * @var \stdClass $questiondata1
@@ -47,9 +47,6 @@ final class helper_test extends \advanced_testcase {
 
     /**
      * Test bulk move of questions.
-     *
-     * @covers ::add_to_module
-     * @covers ::question_add_to_quiz_avtivity
      */
     public function test_add_to_module(): void {
         $this->resetAfterTest();
@@ -125,8 +122,6 @@ final class helper_test extends \advanced_testcase {
 
     /**
      * Test get module for course only gets quiz.
-     *
-     * @covers ::get_modules_for_course
      */
     public function test_get_modules_for_course(): void {
         $this->resetAfterTest();
